@@ -26,7 +26,6 @@ Bienvenue sur le simulateur d'horaire de départ ! Ce projet a été conçu pour
 - `index.html` : Page principale du simulateur.
 - `style.css` : Feuille de style pour le design.
 - `script.js` : Script pour gérer les calculs et interactions.
-- `assets/` : Dossier contenant les images, icônes ou autres ressources.
 
 ---
 
@@ -53,4 +52,4 @@ Ce projet est ouvert à la contribution ! Si vous avez des idées pour l'amélio
 
 Merci à tous ceux qui utiliseront ou contribueront à ce simulateur ! Nous espérons qu'il vous sera utile au quotidien.
 
-© [Votre Nom] - Fait avec ❤️ et un peu de code.
+© [Rami REGAIEG] - Fait avec ❤️ et un peu de code.
