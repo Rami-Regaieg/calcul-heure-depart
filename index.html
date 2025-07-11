@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de l'heure de départ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <p>Bienvenue sur le simulateur d'horaire de départ.</p>
+        <p><legend>Remplissez les différents champs puis cliquer sur le bouton "Calculer" afin d'obtenir l'horaire minimum auquel vous avez besoin de partir selon le nombre d'heure à travailler dans la journée</legend></p>
+    </header>
+    <div class="container">
+        <h1>Calcul de l'heure de départ</h1>
+        <form id="workHoursForm">
+            <label for="arrival">Heure d'arrivée (HH:MM)</label>
+            <input type="time" id="arrival" required>
+            <br>
+            <label for="lunchStart">Départ déjeuner (HH:MM)</label>
+            <input type="time" id="lunchStart" required>
+            <br>
+            <label for="lunchEnd">Retour déjeuner (HH:MM)</label>
+            <input type="time" id="lunchEnd" required>
+            <br>
+            <label for="requiredHours">Nombre d'heures à travailler (HH:MM)</label>
+            <input type="time" id="requiredHours" required>
+            <br>
+            <button type="button" onclick="calculateDeparture()">Calculer</button>
+        </form>
+        <fieldset id="resultFieldset">
+            <legend>Résultat</legend>
+            <div id="result">Vous devez partir à : <span id="departureTime"></span></div>
+        </fieldset>
+    </div>
+    <footer>
+        <p>Créé par <a href="https://www.linkedin.com/in/rami-regaieg-555475166/" target="_blank">Rami</a> à l'aide de <a href="https://copilot.microsoft.com" target="_blank">Copilot</a>.</p>
+    </footer>
+
+    <script>
+        function calculateDeparture() {
+            const arrival = document.getElementById('arrival').value;
+            const lunchStart = document.getElementById('lunchStart').value;
+            const lunchEnd = document.getElementById('lunchEnd').value;
+            const requiredHours = document.getElementById('requiredHours').value;
+
+            const arrivalTime = new Date(`1970-01-01T${arrival}:00`);
+            const lunchStartTime = new Date(`1970-01-01T${lunchStart}:00`);
+            const lunchEndTime = new Date(`1970-01-01T${lunchEnd}:00`);
+            const requiredTime = new Date(`1970-01-01T${requiredHours}:00`);
+
+            const morningHours = (lunchStartTime - arrivalTime) / (1000 * 60 * 60);
+            const requiredTotalHours = requiredTime.getHours() + requiredTime.getMinutes() / 60;
+            const requiredAfternoonHours = requiredTotalHours - morningHours;
+            const requiredAfternoonMinutes = requiredAfternoonHours * 60;
+
+            const departureTime = new Date(lunchEndTime.getTime() + requiredAfternoonMinutes * 60000);
+            const departureHours = departureTime.getHours().toString().padStart(2, '0');
+            const departureMinutes = departureTime.getMinutes().toString().padStart(2, '0');
+
+            document.getElementById('departureTime').innerText = `${departureHours}:${departureMinutes}`;
+        }
+    </script>
+</body>
+</html>
